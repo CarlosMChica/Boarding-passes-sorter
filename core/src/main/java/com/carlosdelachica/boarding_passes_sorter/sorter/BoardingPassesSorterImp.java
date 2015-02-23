@@ -1,6 +1,6 @@
 package com.carlosdelachica.boarding_passes_sorter.sorter;
 
-import com.carlosdelachica.boarding_passes_sorter.model.BoardingPass;
+import com.carlosdelachica.boarding_passes_sorter.model.BasicBoardingPass;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,30 +9,30 @@ import java.util.Map;
 
 public class BoardingPassesSorterImp implements BoardingPassesSorter {
 
-    private Map<String, BoardingPass> originsMap = new HashMap<>();
-    private Map<BoardingPass, String> destinationsMap = new HashMap<>();
-    private List<BoardingPass> sortedBoardingPasses;
-    private BoardingPass departureBoardingPass;
+    private Map<String, BasicBoardingPass> originsMap = new HashMap<>();
+    private Map<BasicBoardingPass, String> destinationsMap = new HashMap<>();
+    private List<BasicBoardingPass> sortedBasicBoardingPasses;
+    private BasicBoardingPass departureBasicBoardingPass;
 
 
     @Override
-    public List<BoardingPass> sort(List<BoardingPass> boardingPasses) {
-        if (boardingPasses == null || boardingPasses.size() == 0) {
+    public List<BasicBoardingPass> sort(List<BasicBoardingPass> basicBoardingPasses) {
+        if (basicBoardingPasses == null || basicBoardingPasses.size() == 0) {
             return new ArrayList<>();
         }
-        init(boardingPasses);
+        init(basicBoardingPasses);
         findDepartureBoardingPass();
         sortTripBoardingPasses();
-        return sortedBoardingPasses;
+        return sortedBasicBoardingPasses;
     }
 
-    private void init(List<BoardingPass> boardingPasses) {
-        sortedBoardingPasses = new ArrayList<>();
-        for (BoardingPass boardingPass : boardingPasses) {
-            String origin = boardingPass.getOrigin();
-            String destination = boardingPass.getDestination();
-            originsMap.put(origin, boardingPass);
-            destinationsMap.put(boardingPass, destination);
+    private void init(List<BasicBoardingPass> basicBoardingPasses) {
+        sortedBasicBoardingPasses = new ArrayList<>();
+        for (BasicBoardingPass basicBoardingPass : basicBoardingPasses) {
+            String origin = basicBoardingPass.getOrigin();
+            String destination = basicBoardingPass.getDestination();
+            originsMap.put(origin, basicBoardingPass);
+            destinationsMap.put(basicBoardingPass, destination);
         }
     }
 
@@ -44,16 +44,16 @@ public class BoardingPassesSorterImp implements BoardingPassesSorter {
                 break;
             }
         }
-        departureBoardingPass = originsMap.remove(departureCity);
-        sortedBoardingPasses.add(departureBoardingPass);
+        departureBasicBoardingPass = originsMap.remove(departureCity);
+        sortedBasicBoardingPasses.add(departureBasicBoardingPass);
     }
 
     private void sortTripBoardingPasses() {
-        String nextCity = departureBoardingPass.getDestination();
+        String nextCity = departureBasicBoardingPass.getDestination();
         do {
-            BoardingPass boardingPass = originsMap.remove(nextCity);
-            sortedBoardingPasses.add(boardingPass);
-            nextCity = boardingPass.getDestination();
+            BasicBoardingPass basicBoardingPass = originsMap.remove(nextCity);
+            sortedBasicBoardingPasses.add(basicBoardingPass);
+            nextCity = basicBoardingPass.getDestination();
         } while (originsMap.size() > 0);
     }
 
