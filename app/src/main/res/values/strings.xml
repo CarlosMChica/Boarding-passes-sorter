@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Boarding-passes-sorter</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="basic_info_string">Take %1$s from %2$s to %3$s. No seat assignment</string>
+    <string name="seat_info_string">Take %1$s from %1$s to %2$s. Sit in seat %3$s</string>
+    <string name="plane_info_string">Take %1$s from %1$s to %2$s. Sit in seat %3$s</string>
+    <string name="seat">Seat %1$s</string>
+    <string name="origin">From %1$s</string>
+    <string name="destination">To %1$s</string>
+    <string name="transport">Take %1$s</string>
+    <string name="sort_trip">Sort trip</string>
+</resources>
